@@ -23,13 +23,13 @@ namespace VigenereCipher
                 if (lang)
                 {
                     Is_key_correct(key, cyrillic);
-                    Is_text_correct(text, latin);
+                    Is_text_correct(text, cyrillic);
                     textBox2.Text = Encrypt(text, key, cyrillic);
                 }
                 else
                 {
                     Is_key_correct(key, latin);
-                    Is_text_correct(text, cyrillic);
+                    Is_text_correct(text, latin);
                     textBox2.Text = Encrypt(text, key, latin);
                 }
             }
@@ -50,13 +50,13 @@ namespace VigenereCipher
                 if (lang)
                 {
                     Is_key_correct(key, cyrillic);
-                    Is_text_correct(text, latin);
+                    Is_text_correct(text, cyrillic);
                     textBox1.Text = Decrypt(text, key, cyrillic);
                 }
                 else
                 {
                     Is_key_correct(key, latin);
-                    Is_text_correct(text, cyrillic);
+                    Is_text_correct(text, latin);
                     textBox1.Text = Decrypt(text, key, latin);
                 }
             }
@@ -139,12 +139,11 @@ namespace VigenereCipher
 
         private static void Is_text_correct(string text, string alphabet)
         {
-            string oppositeAlphabet = alphabet.Replace("0123456789", "");
             foreach (char s in text)
             {
-                if (s != ' ' && oppositeAlphabet.Contains(s))
+                if (!alphabet.Contains(s))
                 {
-                    throw new Exception("Текст содержит не соответствующие алфавиту буквы.");
+                    throw new Exception("Текст содержит не соответствующие алфавиту буквы или пробелы.");
                 }
             }
         }
